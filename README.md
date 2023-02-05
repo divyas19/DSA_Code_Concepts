@@ -1,1 +1,1 @@
-# DSA_Code_Prcatice
+DSA code practice alongwith several useful concepts.
