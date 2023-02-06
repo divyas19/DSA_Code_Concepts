@@ -1,3 +1,5 @@
+//O(logN)
+
 import java.io.*;
 import java.util.*;
 
