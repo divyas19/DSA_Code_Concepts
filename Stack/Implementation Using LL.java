@@ -76,6 +76,7 @@ public class Main
                 System.out.print(top.data);
                 top = top.next;
             }
+            System.out.println();
             }
         }
         
