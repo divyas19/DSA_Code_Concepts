@@ -45,6 +45,66 @@ public class Main
         inorder(root.right);
     }
     
+    
+    public static boolean search(Node root, int key)
+    {
+        if(root == null)
+        return false;
+         
+        if(key < root.data)
+        {
+            return search(root.left,key);
+        }
+        else if(root.data == key)
+        {
+            return true;
+        }
+        else
+        {
+           return search(root.right,key);
+        }
+        
+    }
+    
+    public static Node delete(Node root, int val)
+    {
+        if(val < root.data)
+        root.left=delete(root.left,val);
+        else if(val>root.data)
+        root.right = delete(root.right,val);
+        else{
+            //case1
+            
+            if(root.left == null &&  root.right == null)
+            return null;
+            
+            //case2
+            if(root.left == null)
+            {
+                return root.right;
+            }
+            else if(root.right == null)
+            {
+                return root.left;
+            }
+            
+            Node IS = inorderSuccessor(root.right);
+            root.data =IS.data;
+            root.right = delete(root.right,IS.data);
+        }
+            
+        return root;
+    }
+    
+    public static Node inorderSuccessor(Node root)
+    {
+        while(root.left != null)
+        {
+            root = root.left;
+        }
+        return root;
+    }
+    
     public static void main(String args[])
     {
         int values[] = {5,1,3,4,2,7};
@@ -54,6 +114,15 @@ public class Main
         {
             root = insert(root, values[i]);
         }
-        System.out.println(root.data);
+        inorder(root);
+        // System.out.println();
+        // if(search(root,9))
+        // System.out.println("True");
+        // else
+        // System.out.println("False");
+        
+        delete(root,5);
+        System.out.println();
+        inorder(root);
     }
 }
