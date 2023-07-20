@@ -48,3 +48,74 @@ public class Main
     }
   }
 }
+
+________________________________________________________________________________________________________
+//Print all permutation
+
+public class Solution {
+
+
+   public static void printPermutation(String str,  String perm) {
+       if(str.length() == 0) {
+           System.out.println(perm);
+           return;
+       }
+      
+       for(int i=0; i<str.length(); i++) {
+           char currChar = str.charAt(i);
+           String newStr = str.substring(0, i) + str.substring(i+1);
+           printPermutation(newStr,  perm+currChar);
+       }
+   }
+   public static void main(String args[]) {
+       String str = "abc";
+       printPermutation(str,"");
+   }
+}
+
+/*
+o/p
+
+abc
+acb
+bac
+bca
+cab
+cba
+
+*/
+
+___________________________________________________________________________________________________________________
+//Print unique permutation
+	
+import java.util.*;
+public class Main {
+
+
+   public static HashSet<String> printPermutation(String str,  String perm,HashSet<String> h ) {
+       if(str.length() == 0) {
+           h.add(perm);
+           return h;
+       }
+      
+       for(int i=0; i<str.length(); i++) {
+           char currChar = str.charAt(i);
+           String newStr = str.substring(0, i) + str.substring(i+1);
+           printPermutation(newStr,  perm+currChar,h);
+       }
+       
+       return h;
+   }
+   public static void main(String args[]) {
+       String str = "aaa";
+       HashSet<String> h = new HashSet<String>();
+       HashSet<String> ans =printPermutation(str,"",h);
+       
+       System.out.println(ans);
+   }
+}
+
+/*
+o/p
+[aaa]
+*/
