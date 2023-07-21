@@ -1,174 +1,147 @@
 import java.io.*;
-import java.util.*;
 
-public class LL
-{
-    Node head;
-    private int size =0;
+public class LL{
     
-    LL()
+    public LL()
     {
-        size=0;
+        this.size =0;
     }
     
-    public class Node 
+    public  Node head;
+    private int size;
+    
+    public class Node
     {
-        int data;
+        String data;
         Node next;
         
-        Node(int data)
+        Node(String val)
         {
-        this.data = data;
-        this.next = null;
+            data = val;
+            
+        }
+    }
+    
+    public  void addFirst(String data)
+    {
+        
+        Node newNode = new Node(data);
         size++;
-        }
-    }
-    
-    void addFirst(int data)
-    {
-        Node newNode = new Node(data);
+        
         if(head == null)
         {
-            head = newNode;
-            return;
-        }
-        Node temp = head;
         head = newNode;
-        newNode.next= temp;
-    }
-    
-    void addLast(int data)
-    {
-        Node newNode = new Node(data);
-        if(head == null)
-        {
-            head = newNode;
-            return;
+        return;
         }
-        Node temp = head;
-        while(temp.next!= null)
-        temp = temp.next;
         
-        temp.next = newNode;
-    }
-    
-    void addMiddle(int data, int pos)
-    {
-        if(pos > size || pos < 0) {
-           System.out.println("Invalid Index value");
-           return;
-       }
-       size++;
+        newNode. next = head;
+        head = newNode;
        
+    }
+    
+    public  void addLast(String data)
+    {
         Node newNode = new Node(data);
-        if(head == null||pos==0)
-        {
-            newNode.next = head;
-            head = newNode;
-            return;
-        }
-        Node curNode = head;
+        size++;
         
-        for(int i=1; i < size;i++)
+        if(head == null)
         {
-           
-           if(i== pos)
-           {
-               Node temp = curNode.next;
-               curNode.next = newNode;
-               newNode.next= temp;
-               break;
-           }
-           curNode = curNode.next;
-           
+        head = newNode;
+        return;
         }
         
+        Node t = head;
+        while(t.next != null)
+        t = t.next;
         
+        t.next = newNode;
+       
     }
     
-    void deleteFirst()
+    public  void printList()
     {
         if(head == null)
         {
-           System.out.println("Empty");
-           return;
-        }
-        
-        head = head.next;
-        size--;
-    }
-    
-    void deleteLast()
-    {
-
-        if(head == null)
-        {
-           System.out.println("Empty");
-           return;
-        }
-        size--;
-        if(head.next == null)
-        {
-            head = null;
+            System.out.println("List Empty");
             return;
         }
         
-        Node prev = head;
-        Node curNode = head.next;
-        while(curNode.next != null)
+        Node t = head;
+        while(t!= null)
         {
-          prev = prev.next;
-          curNode = curNode.next;
-        }
-        prev.next = null;
-    }
-    
-    int getSize()
-    {
-        return size;
-    }
-    
-    void print()
-    {
-        Node temp = head;
-        while(temp != null)
-        {
-            System.out.print(temp.data+"->");
-            temp = temp.next;
+            System.out.print(t.data+" -> ");
+            t = t.next;
         }
         System.out.println("null");
+      
+    }
+    
+    public void deleteFirst()
+    {
+        if(head == null)
+        {
+        System.out.println("Nothing to delete");
+        return;
+        }
+    
+        size--;
+        System.out.println("Element deleted : "+head.data);
+        head = head.next;
+    }
+    
+    public void deleteLast()
+    {
+        Node t = head;
+        if(head== null)
+        {
+        System.out.println("Nothing to delete");
+        return;
+        }
+        
+        if(head.next == null)
+        {
+             System.out.println("Element deleted : "+ head.data);
+             head = null;
+             size--;
+             return;
+        }
+        
+        while(t.next.next != null)
+        t = t.next;
+        
+        System.out.println("Element deleted : "+ t.next.data);
+        t.next = null;
+        
+        size--;
+    }
+    
+    public int getSize()
+    {
+        return size;
     }
     
     public static void main(String args[])
     {
         LL obj = new LL();
-        obj.addFirst(12);
-        obj.print();
-        obj.addFirst(18);
-        obj.print();
-        obj.addLast(10);
-        obj.print();
-        obj.deleteFirst();
-        obj.print();
+        obj.addFirst("1");
+        obj.addFirst("3");
+        obj.addLast("2");
+        System.out.println(obj.getSize());//3
+        // obj.printList();//3 1 2 null
+        // obj.deleteFirst();
+        // obj.printList();//1 2 null
+        // obj.deleteFirst();
+        // obj.printList();//2 null
+        // obj.deleteFirst();
+        // obj.printList();// List Empty
         obj.deleteLast();
-        obj.print();
-        obj.addFirst(13);
-        obj.print();
-        obj.addMiddle(9,1);
-        obj.print();
-       System.out.println(obj.getSize());
+        obj.printList();//3 1 null
+        obj.deleteLast();
+        obj.printList();//3 null
+        obj.deleteLast();
+        obj.printList();//List Empty
+        obj.deleteLast();
+        obj.printList();//List Empty
+        System.out.println(obj.getSize());//0
     }
-    
 }
-
-/*
-OUTPUT
-12->null
-18->12->null
-18->12->10->null
-12->10->null
-12->null
-13->12->null
-13->9->12->null
-4
-*/
