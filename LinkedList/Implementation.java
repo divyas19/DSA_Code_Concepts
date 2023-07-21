@@ -21,6 +21,7 @@ public class LL{
             
         }
     }
+
     
     public  void addFirst(String data)
     {
@@ -38,6 +39,7 @@ public class LL{
         head = newNode;
        
     }
+
     
     public  void addLast(String data)
     {
@@ -57,6 +59,7 @@ public class LL{
         t.next = newNode;
        
     }
+
     
     public  void printList()
     {
@@ -75,6 +78,8 @@ public class LL{
         System.out.println("null");
       
     }
+
+
     
     public void deleteFirst()
     {
@@ -88,6 +93,7 @@ public class LL{
         System.out.println("Element deleted : "+head.data);
         head = head.next;
     }
+
     
     public void deleteLast()
     {
@@ -114,11 +120,50 @@ public class LL{
         
         size--;
     }
+
+
     
     public int getSize()
     {
         return size;
     }
+
+
+    
+    public void reverseIterate()
+    {
+        if(head == null || head.next == null)
+        return;
+        
+        Node prev = head;
+        Node cur = head.next;
+        while(cur != null)
+        {
+            Node nextNode = cur.next;
+            cur.next = prev;
+            
+            prev = cur;
+            cur = nextNode;
+        }
+        head.next = null;
+        head = prev;
+    }
+
+
+    
+    public Node reverseRec(Node head)
+    {
+        if(head == null || head.next == null)
+        return head;
+        
+        Node newHead = reverseRec(head.next);
+        head.next.next = head;
+        head.next = null;
+        
+        return newHead;
+    }
+
+
     
     public static void main(String args[])
     {
@@ -127,21 +172,27 @@ public class LL{
         obj.addFirst("3");
         obj.addLast("2");
         System.out.println(obj.getSize());//3
-        // obj.printList();//3 1 2 null
+        obj.printList();//3 1 2 null
         // obj.deleteFirst();
         // obj.printList();//1 2 null
         // obj.deleteFirst();
         // obj.printList();//2 null
         // obj.deleteFirst();
         // obj.printList();// List Empty
-        obj.deleteLast();
-        obj.printList();//3 1 null
-        obj.deleteLast();
-        obj.printList();//3 null
-        obj.deleteLast();
-        obj.printList();//List Empty
-        obj.deleteLast();
-        obj.printList();//List Empty
-        System.out.println(obj.getSize());//0
+        // obj.deleteLast();
+        // obj.printList();//3 1 null
+        // obj.deleteLast();
+        // obj.printList();//3 null
+        // obj.deleteLast();
+        // obj.printList();//List Empty
+        // obj.deleteLast();
+        // obj.printList();//List Empty
+        // System.out.println(obj.getSize());//0
+        obj.reverseIterate();
+        obj.printList();
+        obj.head = obj.reverseRec(obj.head);
+        obj.printList();
     }
+
+    
 }
