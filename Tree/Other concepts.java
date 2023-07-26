@@ -103,5 +103,37 @@ public static int diameter(Node root) {
        return Math.max(diam1, Math.max(diam2, diam3));
    }
 
+Diameter of Tree - Approach2 O(N)
+ public static class TreeInfo
+ {
+       int ht;
+       int d;
+       
+       TreeInfo(int ht, int d)
+       {
+           this.ht = ht;
+           this.d = d;
+       }
+ }
 
-
+ public static TreeInfo dia2(Node root)
+ {
+           
+           if(root == null)
+           return new TreeInfo(0,0);
+           
+           TreeInfo l = dia2(root.left);
+           TreeInfo r = dia2(root.right);
+           
+           int d1= l.d;
+           int d2= r.d;
+           int d3= l.ht+r.ht+1;
+           
+           int myD= Math.max(d1,Math.max(d2,d3));
+           int myH= Math.max(l.ht,r.ht)+1;
+         
+           return new TreeInfo(myH,myD);
+ }
+       
+//In main method
+//System.out.println(tree.dia2(root).d);
