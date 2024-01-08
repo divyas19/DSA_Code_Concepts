@@ -184,3 +184,31 @@ o/p
 7 Ba
 8 BA
 */
+
+_______________________________________________________________________________________________________________________________________
+
+public class Solution {
+   public static void sol(String str, int idx, String ns) {
+       if(idx==str.length()) {
+           System.out.println(ns);
+           return;
+       }
+      char c = str.charAt(idx);
+      String cCaps = String.valueOf(c).toUpperCase();
+       sol(str,idx+2,ns+c+str.charAt(idx+1));
+       sol(str,idx+2,ns+cCaps+str.charAt(idx+1));
+   }
+   public static void main(String args[]) {
+       String s = "a1B2";
+       String str = s.toLowerCase();
+       sol(str, 0, "");
+   }
+}
+
+/*
+o/p
+a1b2
+a1B2
+A1b2
+A1B2
+*/
