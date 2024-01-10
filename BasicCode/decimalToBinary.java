@@ -1,25 +1,32 @@
-import java.io.*;
+import java.io.*; 
 
-public class Main
-{
-  public static void main (String args[]) throws IOException
-  {
-    BufferedReader br = new BufferedReader (new InputStreamReader (System.in));
-    int a = Integer.parseInt (br.readLine());
-    int arr[] = new int[a];
-    int i = 0;
-    while (a > 0)
-      {
-	  int val = a % 2;
-	  arr[i] = val;
-	  a = a / 2;
-	  i++;
-      }
+class Solution
+{ 
+	static void decToBinary(int n) 
+	{ 
+		int[] binaryNum = new int[1000]; 
 
-    for (int j = i-1;j>=0;j--)
-      {
-	  System.out.print (arr[j]);
-      }
-  }
+		int i = 0; 
+		while (n > 0) 
+		{ 
+			binaryNum[i] = n % 2; 
+			n = n / 2; 
+			i++; 
+		} 
+
+		for (int j = i - 1; j >= 0; j--) 
+			System.out.print(binaryNum[j]); 
+	} 
+
+	public static void main (String[] args) 
+	{ 
+		int n = 17; 
+		System.out.println("Decimal - " + n); 
+		System.out.print("Binary - "); 
+		decToBinary(n); 
+	} 
 }
 
+//O/P
+//Decimal - 17
+//Binary - 10001
