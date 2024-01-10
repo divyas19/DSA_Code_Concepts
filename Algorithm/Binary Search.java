@@ -85,3 +85,39 @@ public class Main{
     
     }
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class Solution {
+
+    public static void binarySearch(int a[] , int k, int l, int h)
+    {
+        if(l<=h)
+        {
+            int mid = l+(h-l)/2;
+            if(k == a[mid])
+            {
+                System.out.println(k+" found at position : "+(mid+1));
+                return;
+            }
+            else if(k < a[mid])
+            {
+                binarySearch(a, k, l , mid-1);
+                return;
+            }
+            else if(k > a[mid])
+            {
+                binarySearch(a, k, mid+1, h);
+                return;
+            }
+            
+        }
+                System.out.println("Element not found : ");
+        
+    }
+    
+    public static void main(String[] args) {
+        int a[] = {-1,4,5,6,8};
+        binarySearch(a,8,0,a.length-1);
+    }
+}
