@@ -90,34 +90,34 @@ public class Main{
 
 class Solution {
 
-    public static void binarySearch(int a[] , int k, int l, int h)
+    public static int binarySearch(int a[] , int k, int l, int h)
     {
         if(l<=h)
         {
             int mid = l+(h-l)/2;
             if(k == a[mid])
             {
-                System.out.println(k+" found at position : "+(mid+1));
-                return;
+                return mid;
             }
             else if(k < a[mid])
             {
-                binarySearch(a, k, l , mid-1);
-                return;
+                return binarySearch(a, k, l , mid-1);
             }
             else if(k > a[mid])
             {
-                binarySearch(a, k, mid+1, h);
-                return;
+                return binarySearch(a, k, mid+1, h);
             }
-            
         }
-                System.out.println("Element not found : ");
-        
+              return -1;
     }
     
     public static void main(String[] args) {
         int a[] = {-1,4,5,6,8};
-        binarySearch(a,8,0,a.length-1);
+        int k = 8;
+        int v = binarySearch(a,k,0,a.length-1);
+        if(v== -1)
+            System.out.println("Element not found : ");
+        else
+            System.out.println(k+" found at position : "+(v+1));
     }
 }
