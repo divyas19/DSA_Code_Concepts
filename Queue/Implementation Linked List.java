@@ -48,11 +48,11 @@ public class Main
                 return -1;
             }
             int front = head.data;
+            head = head.next;
             if(head == null)
             {
                 tail = null;
             }
-            head = head.next;
             return front;
             
         }
