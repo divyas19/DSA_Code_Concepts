@@ -2,6 +2,7 @@ class Solution {
     public int longestValidParentheses(String s) {
         Stack<Character> st = new Stack<Character>();
         Stack<Integer> ind = new Stack<Integer>();
+        ind.push(-1);
         int max = 0;
         for(int i =0; i < s.length(); i++)
         {
