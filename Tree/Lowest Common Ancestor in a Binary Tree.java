@@ -13,9 +13,7 @@ class Solution
 		Node r = lca(root.right,n1,n2);
 		
 		if(l== null) return r;
-		else if(r==null) return l;
-		else if(l== null && r==null)
-		return root;
+		if(r==null) return l;
 		
 		return root;
 	}
