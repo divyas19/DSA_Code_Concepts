@@ -6,16 +6,16 @@ class Solution
 		if(root == null)
 		return null;
 		
-		if(root.data == n1 || root.data == n2)
+		if(root.data == n1 || root.data == n2)  //case : current node
 		return root;
 		
 		Node l = lca(root.left,n1,n2);
 		Node r = lca(root.right,n1,n2);
 		
-		if(l== null) return r;
-		if(r==null) return l;
+		if(l== null) return r;  //case : both in right 
+		if(r==null) return l;  //case : both in left
 		
-		return root;
+		return root;  //case : one in right and other in left
 	}
 }
 
