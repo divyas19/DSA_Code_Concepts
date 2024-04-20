@@ -140,9 +140,15 @@ public class Main
         
         if(root.left == null  && root.right == null)
         printPath(path);
-        else{
-        printRootToLeaf(root.left, path);
-        printRootToLeaf(root.right, path);
+        // else{
+        // printRootToLeaf(root.left, path);
+        // printRootToLeaf(root.right, path);
+        // }
+
+        if(root.left != null || root.right != null)
+        {
+            printRootToLeaf(root.left,path);
+            printRootToLeaf(root.right, path);
         }
         path.remove(path.size()-1);
     }
