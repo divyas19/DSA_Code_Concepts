@@ -178,3 +178,98 @@ public class Main{
     
     }
 }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+import java.io.*;
+import java.util.*;
+
+public class Main{
+    
+    static class Edge{
+        int src;
+        int dest;
+        int wt;
+        
+        Edge(int src, int dest, int wt)
+        {
+            this.src= src;
+            this.dest = dest;
+            this.wt = wt;
+        }
+    }
+    
+    public static void createGraph(ArrayList<Edge> graph[])
+    {
+        for(int i =0 ; i < graph.length; i++)
+        {
+            graph[i] = new ArrayList<Edge>();
+        }
+            graph[0].add(new Edge(0,1,20));
+            graph[1].add(new Edge(1,0,20));
+            graph[2].add(new Edge(2,3,20));
+            graph[3].add(new Edge(3,2,40));
+    }
+    
+    public static void bfs(ArrayList<Edge> graph[], boolean vis[],int start)
+    {
+        Queue<Integer> q = new LinkedList<Integer>();
+        
+        q.add(start);
+        
+        while(!q.isEmpty())
+        {
+            int cur = q.remove();
+            if(!vis[cur] == true)
+            {
+                System.out.print(cur+" ");
+                vis[cur] = true;
+                for(int i = 0; i < graph[cur].size();i++)
+                {
+                    if(! vis[cur] == true)
+                    {
+                        Edge e = graph[cur].get(i);
+                        q.add(e.dest);
+                    }
+                }
+            }
+        }
+        
+    }
+    
+     public static void dfs(ArrayList<Edge> graph[], boolean vis[],int start)
+    {
+
+            if(vis[start] == false)
+            {
+                System.out.print(start+" ");
+                vis[start] = true;
+                for(int i = 0; i < graph[start].size();i++)
+                {
+                    
+                        Edge e = graph[start].get(i);
+                        if(! vis[start] == true)
+                        {
+                            dfs(graph,vis,e.dest);
+                        }
+                    
+                    
+                }
+            
+        }
+    }
+    
+    public static void main(String args[])
+    {
+        int v = 7;
+        ArrayList<Edge> graph[] = new ArrayList[v];
+        createGraph(graph);
+        boolean vis[] = new boolean[v];
+        for(int i = 0 ; i < v; i++)
+        {
+            if(vis[i] == false)
+            bfs(graph,vis,i);
+            // dfs(graph,vis,i);
+        }
+    }
+}
