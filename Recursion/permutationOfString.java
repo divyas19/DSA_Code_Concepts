@@ -34,6 +34,7 @@ cba
 */
 
 ___________________________________________________________________________________________________________________
+   
 //Print unique permutation
 
 import java.util.*;
@@ -67,7 +68,10 @@ o/p
 [aaa]
 */
 
-_____________________________________________________________________________________________________________________________________________
+_____________________________________________________________________________________________________________________________________________ 
+   
+//Print all cases permutations
+   
 import java.util.*;
 import java.io.*;
 
@@ -105,29 +109,40 @@ BA
 */
 
 _______________________________________________________________________________________________________________________________________
-
+   
+//Print all cases permutations with numbers
+   
 public class Solution {
-   public static void sol(String str, int idx, String ns) {
-       if(idx==str.length()) {
-           System.out.println(ns);
+
+   public static void printPermutation(String str,  String perm) {
+       if(str.length() == 0) {
+           System.out.println(perm);
            return;
        }
-      char c = str.charAt(idx);
-      String cCaps = String.valueOf(c).toUpperCase();
-       sol(str,idx+2,ns+c+str.charAt(idx+1));
-       sol(str,idx+2,ns+cCaps+str.charAt(idx+1));
+      
+       for(int i=0; i<str.length(); i+=2) {
+           char currChar = str.charAt(i);
+           String currCharCaps = String.valueOf(currChar).toUpperCase();
+           String newStr = str.substring(0, i) + str.substring(i+2);
+           printPermutation(newStr,  perm+currChar+str.charAt(i+1));
+           printPermutation(newStr,  perm+currCharCaps+str.charAt(i+1));
+       }
    }
    public static void main(String args[]) {
-       String s = "a1B2";
-       String str = s.toLowerCase();
-       sol(str, 0, "");
+       String s = "a1b1";
+      String str = s.toLowerCase();
+      printPermutation(str,"");
    }
 }
 
 /*
 o/p
-a1b2
-a1B2
-A1b2
-A1B2
+a1b1
+a1B1
+A1b1
+A1B1
+b1a1
+b1A1
+B1a1
+B1A1
 */
