@@ -231,3 +231,48 @@ b1A1
 B1a1
 B1A1
 */
+
+_______________________________________________________________________________________________________________________________________
+   
+//Permutation with Spaces
+
+import java.util.*;
+
+class Solution {
+    private void backtrack(List<String> result, String s, int index, StringBuilder sb) {
+        if (index == s.length()) {
+            result.add(sb.toString());
+            return;
+        }
+
+        if (index > 0) {
+            // Add a space before the current character
+            sb.append(' ');
+            sb.append(s.charAt(index));
+            backtrack(result, s, index + 1, sb);
+            sb.deleteCharAt(sb.length() - 1); // remove the character
+            sb.deleteCharAt(sb.length() - 1); // remove the space
+        }
+
+        // Add the current character without a space
+        sb.append(s.charAt(index));
+        backtrack(result, s, index + 1, sb);
+        sb.deleteCharAt(sb.length() - 1); // remove the character
+    }
+
+    public List<String> permutationsWithSpaces(String s) {
+        List<String> result = new ArrayList<>();
+        backtrack(result, s, 0, new StringBuilder());
+        Collections.sort(result);
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        String str = "ABC";
+        List<String> result = sol.permutationsWithSpaces(str);
+        System.out.println(result);
+    }
+}
+
