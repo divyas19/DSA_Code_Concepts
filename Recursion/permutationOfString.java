@@ -70,6 +70,45 @@ o/p
 
 _____________________________________________________________________________________________________________________________________________ 
 
+// Only Letter Case Permutation
+
+   import java.util.*;
+
+class Solution {
+    private void backtrack(List<String> result, String s, int index, StringBuilder sb) {
+        if (index == s.length()) {
+            result.add(sb.toString());
+            return;
+        }
+
+        char c = s.charAt(index);
+        sb.append(Character.toLowerCase(c));
+        backtrack(result, s, index + 1, sb);
+        sb.deleteCharAt(sb.length() - 1);
+
+        // Uppercase path
+        sb.append(Character.toUpperCase(c));
+        backtrack(result, s, index + 1, sb);
+        sb.deleteCharAt(sb.length() - 1);
+    }
+
+    public List<String> letterCasePermutation(String s) {
+        List<String> result = new ArrayList<>();
+        backtrack(result, s, 0, new StringBuilder());
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        String s1 = "ab";
+        System.out.println(sol.letterCasePermutation(s1)); // [ab, aB, Ab, AB]
+
+    }
+}
+
+_____________________________________________________________________________________________________________________________________________
+
 //Letter Case Permutaion
    
 Given a string s, you can transform every letter individually to be lowercase or uppercase to create another string.
