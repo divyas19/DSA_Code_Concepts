@@ -1,4 +1,5 @@
 //Print all subsequences of a given String.
+//PowerSet
 
 public class Solution {
 
