@@ -70,47 +70,8 @@ o/p
 
 _____________________________________________________________________________________________________________________________________________ 
 
-// Only Letter Case Permutation
+Letter Case Permutation
 
-   import java.util.*;
-
-class Solution {
-    private void backtrack(List<String> result, String s, int index, StringBuilder sb) {
-        if (index == s.length()) {
-            result.add(sb.toString());
-            return;
-        }
-
-        char c = s.charAt(index);
-        sb.append(Character.toLowerCase(c));
-        backtrack(result, s, index + 1, sb);
-        sb.deleteCharAt(sb.length() - 1);
-
-        // Uppercase path
-        sb.append(Character.toUpperCase(c));
-        backtrack(result, s, index + 1, sb);
-        sb.deleteCharAt(sb.length() - 1);
-    }
-
-    public List<String> letterCasePermutation(String s) {
-        List<String> result = new ArrayList<>();
-        backtrack(result, s, 0, new StringBuilder());
-        return result;
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        
-        String s1 = "ab";
-        System.out.println(sol.letterCasePermutation(s1)); // [ab, aB, Ab, AB]
-
-    }
-}
-
-_____________________________________________________________________________________________________________________________________________
-
-//Letter Case Permutaion
-   
 Given a string s, you can transform every letter individually to be lowercase or uppercase to create another string.
 Return a list of all possible strings we could create. Return the output in any order.
    
@@ -122,75 +83,43 @@ Example 2:
 Input: s = "3z4"
 Output: ["3z4","3Z4"]
 
-Constraints:
-1 <= s.length <= 12
-s consists of lowercase English letters, uppercase English letters, and digits.   
-
-
-class Solution {
-    public List<String> letterCasePermutation(String s) {
-        List<String> result = new ArrayList<>();
-        backtrack(result, s, 0);
-        return result;
-    }
-
-    private void backtrack(List<String> result, String s, int index) {
-        if (index == s.length()) {
-            result.add(s);
-            return;
-        }
-
-        char c = s.charAt(index);
-        if (Character.isLetter(c)) {
-            backtrack(result, s.substring(0, index) + Character.toLowerCase(c) + s.substring(index + 1), index + 1);
-            backtrack(result, s.substring(0, index) + Character.toUpperCase(c) + s.substring(index + 1), index + 1);
-        } else {
-            backtrack(result, s, index + 1);
-        }
-    }
-}
-
-
-
-_____________________________________________________________________________________________________________________________________________ 
-
-
-//Print all cases permutations
-   
-import java.util.*;
-import java.io.*;
-
 public class Solution {
 
-   public static void printPermutation(String str,  String perm) {
-       if(str.length() == 0) {
-           System.out.println(perm);
-           return;
-       }
+  public static void printPermutation(String str, String perm) {
+      if (str.length() == 0) {
+          System.out.println(perm);
+          return;
+      }
       
-       for(int i=0; i<str.length(); i++) {
-           char currChar = str.charAt(i);
-           String currCharCaps = String.valueOf(currChar).toUpperCase();
-           String newStr = str.substring(0, i) + str.substring(i+1);
-           printPermutation(newStr,  perm+currChar);
-           printPermutation(newStr,  perm+currCharCaps);
-       }
-   }
-   public static void main(String args[]) {
-       String s = "ab";
-       printPermutation(s,"");
-   }
+      char currChar = str.charAt(0);
+      String newStr = str.substring(1);
+
+      if (Character.isDigit(currChar)) {
+          printPermutation(newStr, perm + currChar);
+      } else {
+          printPermutation(newStr, perm + Character.toLowerCase(currChar));
+          printPermutation(newStr, perm + Character.toUpperCase(currChar));
+      }
+  }
+   
+  public static void main(String args[]) {
+      String str = "3z4";
+      printPermutation(str, "");
+  }
 }
+
 /*
 o/p
-ab
-aB
-Ab
-AB
-ba
-bA
-Ba
-BA
+a1b2
+a1B2
+A1b2
+A1B2
+*/
+
+/*
+o/p
+3z4
+3Z4
 */
 
 _______________________________________________________________________________________________________________________________________
@@ -231,48 +160,3 @@ b1A1
 B1a1
 B1A1
 */
-
-_______________________________________________________________________________________________________________________________________
-   
-//Permutation with Spaces
-
-import java.util.*;
-
-class Solution {
-    private void backtrack(List<String> result, String s, int index, StringBuilder sb) {
-        if (index == s.length()) {
-            result.add(sb.toString());
-            return;
-        }
-
-        if (index > 0) {
-            // Add a space before the current character
-            sb.append(' ');
-            sb.append(s.charAt(index));
-            backtrack(result, s, index + 1, sb);
-            sb.deleteCharAt(sb.length() - 1); // remove the character
-            sb.deleteCharAt(sb.length() - 1); // remove the space
-        }
-
-        // Add the current character without a space
-        sb.append(s.charAt(index));
-        backtrack(result, s, index + 1, sb);
-        sb.deleteCharAt(sb.length() - 1); // remove the character
-    }
-
-    public List<String> permutationsWithSpaces(String s) {
-        List<String> result = new ArrayList<>();
-        backtrack(result, s, 0, new StringBuilder());
-        Collections.sort(result);
-        return result;
-    }
-
-    public static void main(String[] args) {
-        Solution sol = new Solution();
-        
-        String str = "ABC";
-        List<String> result = sol.permutationsWithSpaces(str);
-        System.out.println(result);
-    }
-}
-
