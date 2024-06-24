@@ -32,26 +32,23 @@ c
 
 */
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+------------------------------------------------------------------------------------------------------------------------------
 
-   public static void sol(String str, int idx, String ns) {
+  public class Solution {
+
+public static void sol(String str, int idx, String ns) {
        if(idx==str.length()-1) {
            System.out.println(ns+str.charAt(str.length()-1));
            return;
        }
       char c = str.charAt(idx);
-       sol(str,idx+2,ns+c+"_");
-       sol(str,idx+2,ns+c);
+       sol(str,idx+1,ns+c+"_");
+       sol(str,idx+1,ns+c);
    }
    public static void main(String args[]) {
        String s = "abc";
        String str = "";
-       for(int i=0; i < s.length()-1;i++)
-       {
-           str =  str + s.charAt(i) + "_";
-       }
-        str =  str + s.charAt(s.length()-1);
-       sol(str, 0, "");
+       sol(s, 0, "");
    }
 }
 
