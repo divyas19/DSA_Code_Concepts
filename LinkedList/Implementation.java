@@ -314,7 +314,7 @@ class LL{
          ind++;
      }
      
-     Node r=reverseList(t);
+     Node r=reverseList(t.next);
      
      Node l = head;
 
